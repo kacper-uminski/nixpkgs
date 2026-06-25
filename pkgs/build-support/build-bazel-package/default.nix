@@ -261,9 +261,14 @@ stdenv.mkDerivation (
       )
     );
 
-    nativeBuildInputs = fBuildAttrs.nativeBuildInputs or [ ] ++ [
-      (bazel.override { enableNixHacks = true; })
-    ];
+    nativeBuildInputs =
+      fBuildAttrs.nativeBuildInputs or [ ]
+      ++ (
+        if 0 <= builtins.compareVersions bazel.version "8.0.0" then
+          [ bazel ]
+        else
+          [ (bazel.override { enableNixHacks = true; }) ]
+      );
 
     preHook = fBuildAttrs.preHook or "" + ''
       export bazelOut="$NIX_BUILD_TOP/output"
