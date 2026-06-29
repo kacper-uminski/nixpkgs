@@ -21821,6 +21821,13 @@ self: super: with self; {
 
   xclim = callPackage ../development/python-modules/xclim { };
 
+  xcm = toPythonModule (
+    pkgs.xcm.override {
+      python3 = python;
+      withPython = true;
+    }
+  );
+
   xdg = callPackage ../development/python-modules/xdg { };
 
   xdg-base-dirs = callPackage ../development/python-modules/xdg-base-dirs { };
