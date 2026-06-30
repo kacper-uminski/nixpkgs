@@ -8957,6 +8957,18 @@ self: super: with self; {
     }
   );
 
+  libpaf = toPythonModule (
+    pkgs.libpaf.override {
+      python3 = python;
+      xcm = (
+        pkgs.xcm.override {
+          python3 = python;
+          withPython = true;
+        }
+      );
+    }
+  );
+
   libparse-python = callPackage ../development/python-modules/libparse-python/package.nix { };
 
   libpass = callPackage ../development/python-modules/libpass { };
