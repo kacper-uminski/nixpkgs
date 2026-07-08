@@ -26,7 +26,8 @@ let
 in
 {
   java = bazelPackage {
-    inherit src registry;
+    inherit src;
+    registries = [ registry ];
     sourceRoot = "source/java-tutorial";
     name = "java-tutorial";
     targets = [ "//:ProjectRunner" ];
@@ -57,7 +58,8 @@ in
     };
   };
   cpp = bazelPackage {
-    inherit src registry;
+    inherit src;
+    registries = [ registry ];
     sourceRoot = "source/cpp-tutorial/stage3";
     name = "cpp-tutorial";
     targets = [ "//main:hello-world" ];
@@ -87,7 +89,8 @@ in
     };
   };
   rust = bazelPackage {
-    inherit src registry;
+    inherit src;
+    registries = [ registry ];
     sourceRoot = "source/rust-examples/01-hello-world";
     name = "rust-examples-01-hello-world";
     targets = [ "//:bin" ];

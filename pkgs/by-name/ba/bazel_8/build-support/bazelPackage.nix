@@ -17,7 +17,7 @@
   commandArgs ? [ ],
   env ? { },
   serverJavabase ? null,
-  registry ? null,
+  registries ? null,
   bazelRepoCacheFOD ? {
     outputHash = null;
     outputHashAlgo = "sha256";
@@ -52,7 +52,7 @@ let
           buildInputs
           nativeBuildInputs
           ;
-        inherit registry;
+        inherit registries;
         inherit
           bazel
           targets
@@ -95,7 +95,7 @@ let
               buildInputs
               nativeBuildInputs
               ;
-            inherit registry;
+            inherit registries;
             inherit
               bazel
               targets
@@ -149,7 +149,7 @@ let
       buildInputs
       nativeBuildInputs
       ;
-    inherit registry bazelRepoCache bazelVendorDeps;
+    inherit registries bazelRepoCache bazelVendorDeps;
     inherit
       bazel
       targets

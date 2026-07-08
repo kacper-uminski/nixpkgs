@@ -6,7 +6,7 @@
 
 args@{
   bazel,
-  registry ? null,
+  registries ? null,
   bazelRepoCache ? null,
   bazelVendorDeps ? null,
   startupArgs ? [ ],
@@ -56,7 +56,7 @@ stdenv.mkDerivation (
         )
       } ${command} ${
         lib.escapeShellArgs (
-          lib.optional (registry != null) "--registry=file://${registry}"
+          lib.optionals (registries != null) (map (r: "--registry=file://${r}") registries)
           ++ lib.optional (bazelRepoCache != null) "--repository_cache=repo_cache"
           ++ lib.optional (bazelVendorDeps != null) "--vendor_dir=vendor_dir"
           ++ commandArgs
